@@ -34,11 +34,12 @@ fun main() {
 }
 
 fun theRadiance(line1: List<String>,line2: List<String>): List<String>{
-    val infectedCrossroads=line2.toMutableList()
+    val infectedCrossroads2=line2.toMutableList()
+    val infectedCrossroads1=line1.toMutableList()
     var contact=mutableListOf<Int>()
     for (i in line2.indices){
         if (i%2==0&&line1[i]=="1"&&line2[i]=="1"){
-            infectedCrossroads[i]="2"
+            infectedCrossroads2[i]="2"
             contact.add(i)
         }
     }
@@ -47,7 +48,7 @@ fun theRadiance(line1: List<String>,line2: List<String>): List<String>{
         var spreadingFront=true
         var back=i
         var front=i
-        if (infectedCrossroads[i]=="1"){
+        if (infectedCrossroads2[i]=="1"){
             while (spreadingBack||spreadingFront){
                 if (back==0){
                     spreadingBack=false
@@ -60,17 +61,17 @@ fun theRadiance(line1: List<String>,line2: List<String>): List<String>{
                     front++
                 }
                 if (line2[back]=="1"&&spreadingBack){
-                    infectedCrossroads[back]="2"
+                    infectedCrossroads2[back]="2"
                 }else{
                     spreadingBack=false
                 }
                 if (line2[front]=="1"&&spreadingFront){
-                    infectedCrossroads[front]="2"
+                    infectedCrossroads2[front]="2"
                 }else{
                     spreadingFront=false
                 }
             }
         }
     }
-    return infectedCrossroads
+    return infectedCrossroads2
 }
