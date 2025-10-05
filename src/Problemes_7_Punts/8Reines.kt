@@ -1,7 +1,7 @@
 package Problemes_7_Punts
 
 import java.util.Scanner
-
+//Versió 2 soluciona: Output ERROR no es mostrava a alguns inputs
 fun main() {
     val sc= Scanner(System.`in`)
     val rep=sc.nextInt()
@@ -13,12 +13,12 @@ fun main() {
 }
 
 fun Output(list: List<String>): String{
-    for (i in 0..6){
-        for (x in list.subList(i+1,7)){
-            if (x==list[i]){
-                return "ERROR"
-            }
+    var repeated= listOf<String>()
+    for (x in list){
+        if (repeated.contains(x)){
+            return "ERROR"
         }
+        repeated = repeated.plus(x)
     }
     return CheckPossible(list)
 }
