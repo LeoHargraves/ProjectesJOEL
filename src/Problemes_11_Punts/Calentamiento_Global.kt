@@ -4,34 +4,33 @@ import java.util.*
 
 fun main() {
     val sc = Scanner(System.`in`)
-    while (true) {
-        val n=sc.nextInt()
-        if (n==0){
-            break
-        }
-        val temps=IntArray(n){
-            sc.nextInt()
-        }
-        if (n==1) {
+    while (true){
+        val numTemp=sc.nextInt()
+        if (numTemp==0){break}
+        if (numTemp==1){
             println(0)
-            continue
-        }
-        val m = n - 1
-        val diffs = IntArray(m) { i -> temps[i + 1] - temps[i] }
-        var cycleLength = m
-        for (k in 1..m) {
-            var ok = true
-            for (i in 0 until m) {
-                if (diffs[i] != diffs[i % k]) {
-                    ok = false
-                    break
+        }else{
+            var temp=listOf<Int>()
+            repeat(numTemp){
+                temp=temp.plus(sc.nextInt())
+            }
+            var canvis=listOf<Int>()
+            for (i in 1..<temp.size){
+                canvis=canvis.plus(temp[i]-temp[i-1])
+            }
+            var output=0
+            for (llargadaBucle in 1..canvis.size){
+                var end=true
+                for (i in 0..<canvis.size){
+                    if (canvis[i]!=canvis[i%llargadaBucle]){
+                        end=false
+                    }
+                }
+                if (output==0&&end){
+                    output=llargadaBucle
                 }
             }
-            if (ok) {
-                cycleLength = k
-                break
-            }
+            println(output)
         }
-        println(cycleLength)
     }
 }
