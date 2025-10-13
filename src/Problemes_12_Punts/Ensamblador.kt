@@ -42,16 +42,6 @@ fun checkFunctions(input: String): Boolean {
     return funOrders.contains(input.split(" ").first())
 }
 
-fun check(enter: Int):Boolean {
-    if (enter < 0) {
-        return false
-    }
-    if (enter > 100000) {
-        return false
-    }
-    return true
-}
-
 fun compilador(input:String,valor:Int):Int{
     var output = valor
     val parts=input.split(" ")

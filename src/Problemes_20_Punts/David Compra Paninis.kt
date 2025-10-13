@@ -25,11 +25,9 @@ fun version2(paninis:List<Int>, moneyCap:Int,numItems:Int){
     while (start+end<numItems){
         val fromEnd=(2*moneyCap-(paninis[paninis.size-end-1]))
         if (paninis[start]>fromEnd){
-            println("se suma: $fromEnd")
             output+=fromEnd
             end++
         }else{
-            println("se suma: ${paninis[start]}")
             output+=paninis[start]
             start++
         }
