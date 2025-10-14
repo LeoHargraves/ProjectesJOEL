@@ -15,30 +15,42 @@ fun main() {
         val numFiles=sc.nextInt()
         val numColumnes=sc.nextInt()
         sc.nextLine()
-        val matriu=mutableListOf<List<Int>>()
+        val matriu=mutableListOf<List<String>>()
         repeat(numFiles){
-            matriu.add(IntArray(numColumnes){sc.nextInt()}.toList())
+            matriu.add(sc.nextLine().split(" "))
         }
-
         var simetriaVertical=false
-        if (numColumnes%2==0){
-            simetriaVertical=checkVertical(matriu, true)
-        }else{
-            simetriaVertical=checkVertical(matriu, false)
-        }
+        simetriaVertical=checkVertical(matriu,numColumnes)
+
         var simetriaHoritzontal=false
-        if (numFiles%2==0){
-            simetriaHoritzontal=checkHoritzontal(matriu, true)
-        }else{
-            simetriaHoritzontal=checkHoritzontal(matriu, false)
+        simetriaHoritzontal=checkHoritzontal(matriu, numFiles)
+        when{
+            simetriaHoritzontal&&simetriaVertical->println("DOBLE")
+            simetriaHoritzontal->println("HORITZONTAL")
+            simetriaVertical->println("VERTICAL")
+            else->println("CAP")
         }
     }
 }
 
-fun checkVertical(matriu: MutableList<List<Int>>, parell: Boolean): Boolean{
-
+fun checkVertical(matriu: MutableList<List<String>>, numColumnes:Int): Boolean{
+    var simetric=true
+    for (columna in 0..numColumnes/2){
+        for (fila in matriu){
+            if (fila[columna]!=fila[numColumnes-1-columna]){
+                simetric=false
+            }
+        }
+    }
+    return simetric
 }
 
-fun checkHoritzontal(matriu: MutableList<List<Int>>, parell: Boolean): Boolean{
-
+fun checkHoritzontal(matriu: MutableList<List<String>>, numFiles:Int): Boolean{
+    var simetric=true
+    for (i in 0..numFiles/2){
+        if (matriu[i]!=matriu[numFiles-i-1]){
+            simetric=false
+        }
+    }
+    return simetric
 }
