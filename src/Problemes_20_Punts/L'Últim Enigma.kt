@@ -12,11 +12,34 @@ import java.util.Scanner
 fun main() {
     val sc = Scanner(System.`in`)
     repeat(sc.nextLine().toInt()) {
-        val dau= IntArray(5){sc.nextInt()}.sorted()
-        if (dau[1]+dau[4]!=dau[2]+dau[3]){
-            println("IMPOSSIBLE")
+        val n=sc.nextInt()
+        val nums= IntArray(n){sc.nextInt()}.toMutableList()
+        for (x in nums){
+            if (x==0){
+                nums.remove(0)
+            }
+        }
+        val suma=nums.sum()
+        if (suma%2==0){
+            println("NO")
         }else{
-            println((dau[2]+dau[3])-dau[0])
+            allCombinations(nums)
         }
     }
+    sc.close()
+}
+
+fun <T> allCombinations(list: List<T>): List<List<T>> {
+    val result = mutableListOf<List<T>>()
+    val n = list.size
+
+    for (i in 0 until (1 shl n)) { // 2^n combinations
+        val combo = mutableListOf<T>()
+        for (j in 0 until n) {
+            if (i and (1 shl j) != 0) combo.add(list[j])
+        }
+        result.add(combo)
+    }
+
+    return result
 }
