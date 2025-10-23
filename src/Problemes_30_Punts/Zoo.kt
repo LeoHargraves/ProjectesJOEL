@@ -17,27 +17,27 @@ fun main() {
     sc.close()
 }
 
-fun replaceIsland(grid: Array<CharArray>, row: Int, col: Int,maxDepth:Int):Int {
+fun replaceIsland(matriu: Array<CharArray>, row: Int, col: Int, maxDepth:Int):Int {
     val newChar='X'
     var newMaxDepth=maxDepth+1
-    val rows = grid.size
-    val cols = grid[0].size
-    val originalChar = grid[row][col]
+    val rows = matriu.size
+    val cols = matriu[0].size
+    var seguentRows=emptyList<Int>()
+    var seguentCols=emptyList<Int>()
+    val originalChar = matriu[row][col]
     if (originalChar == newChar) return 0
     fun dfs(r: Int, c: Int) {
         if (r !in 0 until rows || c !in 0 until cols) return
-        if (grid[r][c] != originalChar) {
-            if (grid[r][c]=='T'||grid[r][c]=='B'){
-                val possible=replaceIsland(grid,r,c,newMaxDepth)
-                if (possible > newMaxDepth){
-                    newMaxDepth=possible
-                }
+        if (matriu[r][c] != originalChar) {
+            if (matriu[r][c]=='T'||matriu[r][c]=='B'){
+                seguentRows=seguentRows.plus(r)
+                seguentCols=seguentCols.plus(c)
             }else{
                 return
             }
         }
 
-        grid[r][c] = newChar
+        matriu[r][c] = newChar
 
         dfs(r + 1, c)
         dfs(r - 1, c)
@@ -46,8 +46,12 @@ fun replaceIsland(grid: Array<CharArray>, row: Int, col: Int,maxDepth:Int):Int {
     }
 
     dfs(row, col)
-    comprovarMatriu(grid)
-    println()
+    for (i in 0 until seguentCols.size){
+        val possible=replaceIsland(matriu,seguentRows[i],seguentCols[i],newMaxDepth)
+        if (possible > newMaxDepth){
+            newMaxDepth=possible
+        }
+    }
     return newMaxDepth
 }
 
