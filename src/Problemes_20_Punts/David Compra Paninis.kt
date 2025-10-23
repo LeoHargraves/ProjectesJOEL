@@ -3,7 +3,50 @@ package Problemes_20_Punts
 import java.util.*
 
 fun main() {
-    ver2()
+    ver3()
+}
+//Aplicar busqueda binaria
+fun ver3(){
+    val sc = Scanner(System.`in`)
+    val numPaninis=sc.nextInt()
+    val casos=sc.nextInt()
+    //Ordenar la llista inicial per no haver-ho de fer tota la estona
+    val paninis=IntArray(numPaninis){sc.nextInt()}.toList().sorted()
+    repeat(casos){
+        version2(paninis, sc.nextInt(),sc.nextInt())
+    }
+}
+
+fun version3(paninis:List<Int>, moneyCap:Int,numItems:Int){
+    when{
+        moneyCap>=paninis.last()->easyPeasy(paninis,numItems)
+
+    }
+}
+
+fun binarySearch(paninis:List<Int>, moneyCap: Int):Int{
+    var low = 0
+    var high = paninis.size - 1
+    var mid=0
+    while (low <= high) {
+        mid = low + (high - low) / 2
+        val guess = paninis[mid]
+        when {
+            guess == moneyCap -> return mid
+            guess < moneyCap -> low = mid + 1
+            else -> high = mid - 1
+        }
+    }
+    return mid
+}
+
+fun easyPeasy(paninis: List<Int>, numItems: Int){
+    //Si això passa moltes vegades pot ser effectiva una llista amb les sumes(possiblitat per v4)
+    var output = 0
+    repeat(numItems){
+        output+=paninis[it]
+    }
+    println(output)
 }
 
 fun ver2(){
@@ -16,7 +59,6 @@ fun ver2(){
         version2(paninis, sc.nextInt(),sc.nextInt())
     }
 }
-
 //Versió 2 perque resulta(surprise surprise) que s'ha d'optimitzar
 fun version2(paninis:List<Int>, moneyCap:Int,numItems:Int){
     var output=0
