@@ -21,4 +21,5 @@ fun main() {
         numGabies++
     }
     println(numGabies)
+    sc.close()
 }
