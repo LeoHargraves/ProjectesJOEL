@@ -32,6 +32,7 @@ fun replaceIsland(matriu: Array<CharArray>, row: Int, col: Int, maxDepth:Int):In
             if (matriu[r][c]=='T'||matriu[r][c]=='B'){
                 seguentRows=seguentRows.plus(r)
                 seguentCols=seguentCols.plus(c)
+                return
             }else{
                 return
             }
