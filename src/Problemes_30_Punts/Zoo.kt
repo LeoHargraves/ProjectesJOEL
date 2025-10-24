@@ -47,8 +47,8 @@ fun replaceIsland(matriu: Array<CharArray>, row: Int, col: Int, maxDepth:Int):In
     }
 
     dfs(row, col)
-    for (i in 0 until seguentCols.size){
-        val possible=replaceIsland(matriu,seguentRows[i],seguentCols[i],newMaxDepth)
+    for (i in seguentCols.indices){
+        val possible=replaceIsland(matriu,seguentRows[i],seguentCols[i],maxDepth+1)
         if (possible > newMaxDepth){
             newMaxDepth=possible
         }
