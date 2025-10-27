@@ -40,8 +40,6 @@ fun replaceBoard(matriu: Array<CharArray>, newChar:Char, animalActual: Char): Ch
         altreAnimal='B'
     }
 
-    //if (originalChar == newChar) return  // no need to replace if same
-
     fun dfs(r: Int, c: Int) {
         if (r !in 0 until rows || c !in 0 until cols) return
         if (matriu[r][c] == altreAnimal) {
