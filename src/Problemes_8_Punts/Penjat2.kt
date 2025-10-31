@@ -37,12 +37,12 @@ fun main() {
     sc.nextLine()
     repeat(rep){
         val secretWord=sc.nextLine().lowercase()
-        val index=buildCharIndexMap(secretWord)
+        val index=secretWord.withIndex().groupBy({ it.value }, { it.index })
         var hiddenWord="_".repeat(secretWord.length)
         var health=5
         val previous=mutableListOf<String>()
         var input=sc.nextLine().lowercase()
-        while (input!="1974"||!(health==0||health==69)){
+        while (input!="1974"&&health in 1..5){
             if (input.length == 1 && input[0].isLetter() && !previous.contains(input)){
                 previous.add(input)
                 if(secretWord.contains(input)){
@@ -58,7 +58,9 @@ fun main() {
                     health=69
                 }
             }
-            input=sc.nextLine().lowercase()
+            if (health in 1..5){
+                input=sc.nextLine().lowercase()
+            }
         }
         if (health==69){
             println("Felicitats! Has endevinat la paraula")
@@ -66,9 +68,4 @@ fun main() {
             println("Vaja! No has endevinat la paraula")
         }
     }
-}
-
-fun buildCharIndexMap(input: String): Map<Char, List<Int>> {
-    return input.withIndex() // gives IndexedValue(index, char)
-        .groupBy({ it.value }, { it.index }) // group by char, collect indexes
 }
