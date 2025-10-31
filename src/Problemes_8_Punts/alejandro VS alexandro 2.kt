@@ -1,6 +1,7 @@
 package Problemes_8_Punts
 
 import java.util.*
+import kotlin.String
 
 fun main() {
     val sc = Scanner(System.`in`)
@@ -30,30 +31,26 @@ fun main() {
             }
         }
         val wanted=sc.nextLine()
-        val queue=mutableListOf("marvel")
-        var numVisited=0
-        var output=0
+        var numVisited=buscarPelicula(nodes, "marvel", wanted,true)
 
-        println(output)
+        println(numVisited.numPeli+1)
 
     }
     sc.close()
 }
 
-fun buscarPelicula(nodes: MutableMap<String,MutableList<String>>, node: String, wanted: String, numPeli:Int): Alejandro{
-    var output= Alejandro(0,true)
-    if (node.contains(wanted)){
-        for (peli in nodes[node]!!){
-
-        }
-    }else{
-        output.numPeli=node.size
-        for (x in node){
-            if (nodes.contains(x)&&output.isActive){
-                val new=buscarPelicula(nodes,nodes[x]!!,wanted,0)
+fun buscarPelicula(nodes: MutableMap<String,MutableList<String>>, node: String, wanted: String,isActive: Boolean): Alejandro{
+    val output= Alejandro(0,isActive)
+    for (peli in nodes[node]!!){
+        if (peli==wanted||!output.isActive){
+            output.isActive=false
+        }else{
+            if (nodes.contains(peli)){
+                val new=buscarPelicula(nodes, peli, wanted,true)
                 output.numPeli+=new.numPeli
                 output.isActive=new.isActive
             }
+            output.numPeli++
         }
     }
     return output
