@@ -28,11 +28,38 @@ fun main() {
     var sumaAcumulada=0
     val esquerraDescendent=esquerra.keys.sortedDescending()
     for (i in esquerraDescendent.indices){
+        sumaAcumulada+=esquerra[esquerraDescendent[i]]!!
         if(i==esquerraDescendent.size-1){
-            for (x in esquerraDescendent[i] downTo 1){}
+            for (x in esquerraDescendent[i] downTo 1){
+                forats[x-1]+=sumaAcumulada
+            }
+        }else{
+            for (x in esquerraDescendent[i] downTo esquerraDescendent[i+1]+1){
+                forats[x-1]+=sumaAcumulada
+            }
         }
-        //forats[llargada]=esquerra[llargada]!!
     }
-
+    sumaAcumulada=0
+    val dretaDescendent=dreta.keys.sortedDescending()
+    for (i in dretaDescendent.indices){
+        sumaAcumulada+=dreta[dretaDescendent[i]]!!
+        if(i==dretaDescendent.size-1){
+            for (x in dretaDescendent[i] downTo 1){
+                forats[forats.size-x]+=sumaAcumulada
+            }
+        }else{
+            for (x in dretaDescendent[i] downTo dretaDescendent[i+1]+1){
+                forats[forats.size-x]+=sumaAcumulada
+            }
+        }
+    }
+    val minim=forats.min()
+    var numForats=0
+    for (x in forats){
+        if (x==minim){
+            numForats++
+        }
+    }
+    println("$minim $numForats")
     sc.close()
 }
