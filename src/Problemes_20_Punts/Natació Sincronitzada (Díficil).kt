@@ -8,24 +8,34 @@ fun main() {
     val casos=sc.nextInt()
     repeat(casos){
         val linies=sc.nextInt()
-        val start=mutableListOf<MutableList<Int>>()
-        repeat(linies/2){
-            start.add(MutableList(linies/2){sc.nextInt()})
+        val startingPositions=emptyArray<Pair<Int,Int>>()
+        for(it in 0..<linies/2){
+            val value=sc.nextInt()
+            if (value==1) {
+                startingPositions.plus(Pair(it/(linies/2-1),it%(linies/2-1)))
+            }
         }
-        val end=mutableListOf<MutableList<Int>>()
-        repeat(linies/2){
-            end.add(MutableList(linies/2){sc.nextInt()})
+        val finalPositions=emptyArray<Pair<Int,Int>>()
+        for(it in 0..<linies/2){
+            val value=sc.nextInt()
+            if (value==1) {
+                finalPositions.plus(Pair(it/(linies/2-1),it%(linies/2-1)))
+            }
         }
     }
     sc.close()
 }
 
-fun piedraAlAgua(start:MutableList<MutableList<Int>>, end:MutableList<MutableList<Int>>): String{
+fun piedraAlAgua(start:MutableList<MutableList<Int>>, end:MutableList<MutableList<Int>>,size:Int): String{
     var radi=0
     var output="NO SINCRONITZADA"
     var bucle=true
     while (bucle){
 
+        radi++
+        if (radi==size){
+            bucle=false
+        }
     }
     return output
 }
