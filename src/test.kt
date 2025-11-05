@@ -2,7 +2,11 @@ import java.util.*
 
 fun main() {
     val sc= Scanner(System.`in`)
-    val (node,valor)=sc.nextLine().split(" -> ")
-    println(node)
-    println(valor)
+    var count=0.0
+    var t=100.0
+    while (t>1) {
+        t*=0.5
+        count++
+    }
+    println(100.0/count*2)
 }

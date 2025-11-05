@@ -1,0 +1,25 @@
+
+
+1:
+    |
+   | |
+  | | |
+ | | | |
+| | | | |
+
+ex entrada 1:
+1(pis)
+ex sortida 1:
+2
+
+ex entrada 2:
+2(pisos)
+ex sortida 2:
+1
+
+ex entrada 3:
+3(pisos)
+ex sortida 3:
+1
+
+Idea adicional: Fer variables els pisos, no només piramide
