@@ -5,42 +5,84 @@ import java.util.*
 fun main() {
     val sc = Scanner(System.`in`)
     val N=sc.nextInt()
-    val matriu = Array(N) { IntArray(N) }
-    for (i in 0 until N) {
-        for (j in 0 until N) {
-            matriu[i][j] = (i + 1) * (j + 1)
+
+    val matriu = Array(N) { IntArray(N){sc.nextInt()} }
+
+    var portaFalsa=true
+    for (toCenter in 0 until N/2){
+        var linePresent=checkLines(matriu,toCenter)
+        if (linePresent){
+            for (circle in 0 until N/2){
+                linePresent=checkCombination(matriu,circle,toCenter)
+            }
+        }
+        if (linePresent){
+            portaFalsa=false
         }
     }
-    val center=N/2
-    for (xPlusCenter in 0..1){
-        for (yPlusCenter in 0..1){
 
-        }
+    if (portaFalsa){
+        println("NO")
+    }else{
+        println("SI")
     }
 
     sc.close()
 }
 
-/*
-var num13=0
-    var pos13=mutableListOf<Pair<Int,Int>>()
-    for (x in N/2-1..N/2){
-        for (y in N/2-1..N/2){
-            if (matriu[x][y]==13){
-                num13++
-                pos13.add(Pair(x,y))
+fun checkLines(matriu:Array<IntArray>,toCenter: Int): Boolean{
+    var linePresent=true
+    for (i in toCenter until matriu[0].size-toCenter){
+        if (matriu[toCenter][i]!=13){
+            linePresent=false
+        }
+    }
+    if (!linePresent){
+        for (i in toCenter until matriu[0].size-toCenter){
+            if (matriu[matriu.size-1-toCenter][i]!=13){
+                linePresent=false
             }
         }
     }
-    var tru=false
-    for (coo in 1 until pos13.size){
-        if (pos13[coo-1].first==pos13[coo].first||pos13[coo-1].second==pos13[coo].second){
-            tru=true
+    if (!linePresent){
+        for (i in toCenter until matriu[0].size-toCenter){
+            if (matriu[i][toCenter]!=13){
+                linePresent=false
+            }
         }
     }
-    if (tru){
-        println("NO")
-    }else{
-
+    if (!linePresent){
+        for (i in toCenter until matriu[0].size-toCenter){
+            if (matriu[i][matriu.size-1-toCenter]!=13){
+                linePresent=false
+            }
+        }
     }
- */
+
+    return linePresent
+}
+
+fun checkCombination(matriu:Array<IntArray>, circle: Int, possibleCircle:Int): Boolean{
+    var linePresent=true
+
+    if (matriu[possibleCircle][circle]!=13||matriu[possibleCircle][matriu.size-1-circle]!=13){
+        linePresent=false
+    }
+
+    if (!linePresent){
+        if (matriu[matriu.size-1-possibleCircle][circle]!=13||matriu[matriu.size-1-possibleCircle][matriu.size-1-circle]!=13){
+            linePresent=false
+        }
+    }
+    if (!linePresent){
+        if (matriu[circle][possibleCircle]!=13||matriu[matriu.size-1-circle][possibleCircle]!=13){
+            linePresent=false
+        }
+    }
+    if (!linePresent){
+        if (matriu[circle][matriu.size-1-possibleCircle]!=13||matriu[matriu.size-1-circle][matriu.size-1-possibleCircle]!=13){
+            linePresent=false
+        }
+    }
+    return linePresent
+}
