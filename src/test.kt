@@ -3,9 +3,21 @@ import java.util.*
 
 fun main() {
     val sc = Scanner(System.`in`)
-    val N=sc.nextInt()
-    val matriu = Array(N) { IntArray(N){sc.nextInt()} }
-    for (toCenter in 0 until N/2){
-        println(checkLines(matriu,toCenter))
+    val n=sc.nextInt()
+    val matriu= Array(n){ CharArray(n) }
+    for (y in matriu.indices){
+        for (x in matriu[y].indices){
+            val int=sc.nextInt()
+            if (int==13){
+                matriu[y][x]='x'
+            }else{
+                matriu[y][x]='o'
+            }
+        }
+    }
+    println()
+    for (line in matriu){
+        println(line.joinToString(" | "))
+        println("____________________________________________")
     }
 }

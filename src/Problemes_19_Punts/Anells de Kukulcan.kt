@@ -13,7 +13,9 @@ fun main() {
         var linePresent=checkLines(matriu,toCenter)
         if (linePresent){
             for (circle in 0 until N/2){
-                linePresent=checkCombination(matriu,circle,toCenter)
+                if(!checkCombination(matriu,circle,toCenter)){
+                    linePresent=false
+                }
             }
         }
         if (linePresent){
@@ -38,6 +40,7 @@ fun checkLines(matriu:Array<IntArray>,toCenter: Int): Boolean{
         }
     }
     if (!linePresent){
+        linePresent=true
         for (i in toCenter until matriu[0].size-toCenter){
             if (matriu[matriu.size-1-toCenter][i]!=13){
                 linePresent=false
@@ -45,6 +48,7 @@ fun checkLines(matriu:Array<IntArray>,toCenter: Int): Boolean{
         }
     }
     if (!linePresent){
+        linePresent=true
         for (i in toCenter until matriu[0].size-toCenter){
             if (matriu[i][toCenter]!=13){
                 linePresent=false
@@ -52,6 +56,7 @@ fun checkLines(matriu:Array<IntArray>,toCenter: Int): Boolean{
         }
     }
     if (!linePresent){
+        linePresent=true
         for (i in toCenter until matriu[0].size-toCenter){
             if (matriu[i][matriu.size-1-toCenter]!=13){
                 linePresent=false
@@ -63,26 +68,21 @@ fun checkLines(matriu:Array<IntArray>,toCenter: Int): Boolean{
 }
 
 fun checkCombination(matriu:Array<IntArray>, circle: Int, possibleCircle:Int): Boolean{
-    var linePresent=true
-
-    if (matriu[possibleCircle][circle]!=13||matriu[possibleCircle][matriu.size-1-circle]!=13){
-        linePresent=false
+    var linePresent=false
+    if (matriu[possibleCircle][circle]==13&&matriu[possibleCircle][matriu.size-1-circle]==13){
+        linePresent=true
     }
 
-    if (!linePresent){
-        if (matriu[matriu.size-1-possibleCircle][circle]!=13||matriu[matriu.size-1-possibleCircle][matriu.size-1-circle]!=13){
-            linePresent=false
-        }
+    if (matriu[matriu.size-1-possibleCircle][circle]==13&&matriu[matriu.size-1-possibleCircle][matriu.size-1-circle]==13){
+        linePresent=true
     }
-    if (!linePresent){
-        if (matriu[circle][possibleCircle]!=13||matriu[matriu.size-1-circle][possibleCircle]!=13){
-            linePresent=false
-        }
+
+    if (matriu[circle][possibleCircle]==13&&matriu[matriu.size-1-circle][possibleCircle]==13){
+        linePresent=true
     }
-    if (!linePresent){
-        if (matriu[circle][matriu.size-1-possibleCircle]!=13||matriu[matriu.size-1-circle][matriu.size-1-possibleCircle]!=13){
-            linePresent=false
-        }
+
+    if (matriu[circle][matriu.size-1-possibleCircle]==13&&matriu[matriu.size-1-circle][matriu.size-1-possibleCircle]==13){
+        linePresent=true
     }
     return linePresent
 }
