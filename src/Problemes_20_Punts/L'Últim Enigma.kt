@@ -14,7 +14,6 @@ fun main() {
     repeat(sc.nextLine().toInt()) {
         val n=sc.nextInt()
         val input= IntArray(n){sc.nextInt()}
-        input.sortDescending()
         val nums= treureZeros(input)
 
         val sumatori=nums.sum()
@@ -22,7 +21,11 @@ fun main() {
         if (sumatori%2==0){
             println("NO")
         }else{
-
+            if (esCorrecte(nums)){
+                println("SI")
+            }else{
+                println("NO")
+            }
         }
     }
     sc.close()
@@ -59,16 +62,21 @@ fun treureZeros(input: IntArray): IntArray{
 
 fun esCorrecte(nums: IntArray): Boolean{
     var correcte=false
-    var llista1=mutableListOf<Int>(nums[0])
-    var llista2=mutableListOf<Int>()
-    for (i in 1 until nums.size){
-        val num=nums[i]
-        val sum1=llista1.sum()
-        val sum2=llista2.sum()
-        if (sum2<sum1){
-            
-        }
+    var lengthLimit=nums.size/2+1
+    for (listLength in 1..lengthLimit){
+
     }
 
     return  true
 }
+
+
+
+
+
+
+
+
+
+
+
