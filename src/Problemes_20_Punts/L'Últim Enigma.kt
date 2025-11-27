@@ -13,33 +13,62 @@ fun main() {
     val sc = Scanner(System.`in`)
     repeat(sc.nextLine().toInt()) {
         val n=sc.nextInt()
-        val nums= IntArray(n){sc.nextInt()}.toMutableList()
-        for (x in nums){
-            if (x==0){
-                nums.remove(0)
-            }
-        }
-        val suma=nums.sum()
-        if (suma%2==0){
+        val input= IntArray(n){sc.nextInt()}
+        input.sortDescending()
+        val nums= treureZeros(input)
+
+        val sumatori=nums.sum()
+
+        if (sumatori%2==0){
             println("NO")
         }else{
-            allCombinations(nums)
+
         }
     }
     sc.close()
 }
 
-fun <T> allCombinations(list: List<T>): List<List<T>> {
-    val result = mutableListOf<List<T>>()
-    val n = list.size
-
-    for (i in 0 until (1 shl n)) { // 2^n combinations
-        val combo = mutableListOf<T>()
-        for (j in 0 until n) {
-            if (i and (1 shl j) != 0) combo.add(list[j])
+fun treureZeros(input: IntArray): IntArray{
+    var numZeros=0
+    for (x in input){
+        if (x==0){
+            numZeros++
         }
-        result.add(combo)
     }
 
-    return result
+    if (numZeros==0){
+        return input
+    }
+
+    val nums= IntArray(input.size-numZeros)
+
+    var numsIt=0
+    var inputIt=0
+    while (inputIt < input.size){
+        if (input[inputIt]==0){
+            inputIt++
+        }else{
+            nums[numsIt]=input[inputIt]
+            inputIt++
+            numsIt++
+        }
+    }
+
+    return nums
+}
+
+fun esCorrecte(nums: IntArray): Boolean{
+    var correcte=false
+    var llista1=mutableListOf<Int>(nums[0])
+    var llista2=mutableListOf<Int>()
+    for (i in 1 until nums.size){
+        val num=nums[i]
+        val sum1=llista1.sum()
+        val sum2=llista2.sum()
+        if (sum2<sum1){
+            
+        }
+    }
+
+    return  true
 }
