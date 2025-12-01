@@ -3,21 +3,25 @@ import java.util.*
 
 fun main() {
     val sc = Scanner(System.`in`)
-    val n=sc.nextInt()
-    val matriu= Array(n){ CharArray(n) }
-    for (y in matriu.indices){
-        for (x in matriu[y].indices){
-            val int=sc.nextInt()
-            if (int==13){
-                matriu[y][x]='x'
+    val length=sc.nextInt()
+    var jo=sc.nextInt()
+    val cilindres=sc.next()
+    var simplified=""
+    var streak=0
+    for(i in 1 until length) {
+        if(i==length-1&&cilindres[i-1] == cilindres[i]){
+            streak++
+        }
+        if (cilindres[i-1] == cilindres[i]&&i!=length-1) {
+            streak++
+        }else{
+            if (streak%2==0){
+                simplified+=cilindres[i-1]
             }else{
-                matriu[y][x]='o'
+                simplified+="${cilindres[i-1]}${cilindres[i-1]}"
             }
+            streak=0
         }
     }
-    println()
-    for (line in matriu){
-        println(line.joinToString(" | "))
-        println("____________________________________________")
-    }
+    println(simplified)
 }
