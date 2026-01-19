@@ -9,12 +9,12 @@ package Problemes_20_Punts
 
 import java.util.Scanner
 
+val sc = Scanner(System.`in`)
+
 fun main() {
-    val sc = Scanner(System.`in`)
     repeat(sc.nextLine().toInt()) {
         val n=sc.nextInt()
         val input= IntArray(n){sc.nextInt()}
-        input.sortDescending()
         val nums= treureZeros(input)
 
         val sumatori=nums.sum()
@@ -22,10 +22,31 @@ fun main() {
         if (sumatori%2==0){
             println("NO")
         }else{
-
+            if (potsFerNumero(nums,sumatori/2+1)){
+                println("SI")
+            }else{
+                println("NO")
+            }
         }
     }
     sc.close()
+}
+
+fun potsFerNumero(nums: IntArray, objectiu:Int): Boolean{
+    val sumes=BooleanArray(objectiu+1){false}
+    sumes[0] = true
+
+    for (num in nums){
+        for(sum in objectiu downTo num){
+            if (sumes[sum-num]){
+                sumes[sum] = true
+            }
+        }
+    }
+
+
+
+    return  sumes[objectiu]||sumes[objectiu-1]
 }
 
 fun treureZeros(input: IntArray): IntArray{
@@ -55,20 +76,4 @@ fun treureZeros(input: IntArray): IntArray{
     }
 
     return nums
-}
-
-fun esCorrecte(nums: IntArray): Boolean{
-    var correcte=false
-    var llista1=mutableListOf<Int>(nums[0])
-    var llista2=mutableListOf<Int>()
-    for (i in 1 until nums.size){
-        val num=nums[i]
-        val sum1=llista1.sum()
-        val sum2=llista2.sum()
-        if (sum2<sum1){
-            
-        }
-    }
-
-    return  true
 }
